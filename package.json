@@ -10,6 +10,7 @@
     "netlify:dev": "netlify dev"
   },
   "dependencies": {
+    "@google/genai": "^1.0.0",
     "@google/generative-ai": "^0.1.3",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
