@@ -22,7 +22,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Initialize the new Google GenAI SDK
+    // Initialize the Google GenAI SDK (Nano Banana)
     const ai = new GoogleGenAI({ apiKey });
 
     // Enhanced prompt for health/wellness content
@@ -33,19 +33,18 @@ Requirements: No text in image, suitable for health education content, inspiring
 
     // Use Gemini 2.5 Flash Image model (Nano Banana)
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-preview-05-20',
+      model: 'gemini-2.5-flash-image',
       contents: enhancedPrompt,
-      config: {
-        responseModalities: ['Text', 'Image']
-      }
     });
 
     // Extract image from response
     let imageData = null;
-    for (const part of response.candidates[0].content.parts) {
-      if (part.inlineData) {
-        imageData = part.inlineData.data;
-        break;
+    if (response.candidates && response.candidates[0] && response.candidates[0].content) {
+      for (const part of response.candidates[0].content.parts) {
+        if (part.inlineData) {
+          imageData = part.inlineData.data;
+          break;
+        }
       }
     }
 
@@ -65,7 +64,7 @@ Requirements: No text in image, suitable for health education content, inspiring
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           success: false,
-          message: 'No image generated',
+          message: 'No image generated - model may not support image output',
           placeholder: true
         })
       };
