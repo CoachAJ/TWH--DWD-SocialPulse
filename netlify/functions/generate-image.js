@@ -31,9 +31,9 @@ Style: Modern, health and wellness focused, vibrant but professional colors.
 Theme: ${prompt}
 Requirements: No text in image, suitable for health education content, inspiring and positive mood.`;
 
-    // Use Gemini 3.0 Flash Image model (Nano Banana)
+    // Use Gemini 2.5 Flash Image model (Nano Banana)
     const response = await ai.models.generateContent({
-      model: 'gemini-3.0-flash-image',
+      model: 'gemini-2.5-flash-preview-05-20',
       contents: enhancedPrompt,
       config: {
         responseModalities: ['Text', 'Image']
